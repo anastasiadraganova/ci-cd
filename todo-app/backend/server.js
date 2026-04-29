@@ -108,9 +108,7 @@ app.put("/api/todos/:id", async (req, res) => {
 
     values.push(id);
     const result = await pool.query(
-      `UPDATE todos SET ${fields.join(", ")} WHERE id = $${
-        values.length
-      } RETURNING id, text, completed, created_at`,
+      `UPDATE todos SET ${fields.join(", ")} WHERE id = $${values.length} RETURNING id, text, completed, created_at`,
       values
     );
 
@@ -193,9 +191,7 @@ io.on("connection", async (socket) => {
 
       values.push(id);
       const result = await pool.query(
-        `UPDATE todos SET ${fields.join(", ")} WHERE id = $${
-          values.length
-        } RETURNING id, text, completed, created_at`,
+        `UPDATE todos SET ${fields.join(", ")} WHERE id = $${values.length} RETURNING id, text, completed, created_at`,
         values
       );
 
